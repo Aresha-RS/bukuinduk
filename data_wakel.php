@@ -32,11 +32,11 @@
 					  $ph = 5;
 					  $start = ($nohal - 1) * $ph;
 					  $no = $start+1;
-					  $la = mysql_query("select * from tbwali_kelas, tbadmin where tbwali_kelas.username=tbadmin.username limit $start,$ph");
-					  while ($da = mysql_fetch_array($la)){
+					  $la = mysqli_query($connect,"select * from tbwali_kelas, tbadmin where tbwali_kelas.username=tbadmin.username limit $start,$ph");
+					  while ($da = $la->fetch_array(MYSQLI_ASSOC)){
 					  
-					  $la2 = mysql_query("select * from tbkelas where id_kelas = '".$da['id_kelas']."'");
-					  $da2 = mysql_fetch_array($la2)
+					  $la2 = mysqli_query($connect,"select * from tbkelas where id_kelas = '".$da['id_kelas']."'");
+					  $da2 = $la2->fetch_array(MYSQLI_ASSOC)
 					  ?>
                         <tr>
                           <th scope="row"><?=$no;?></th>
@@ -52,8 +52,8 @@
 					  <?php
 					  $no++;
 					  }
-					  $lb = mysql_query("select * from tbwali_kelas");
-					  $jd = mysql_num_rows($lb);
+					  $lb = mysqli_query($connect,"select * from tbwali_kelas");
+					  $jd = mysqli_num_rows($lb);
 					  $jumhal = ceil($jd/$ph);
 					  ?>
                       </tbody>

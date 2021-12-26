@@ -6,8 +6,8 @@
 					
 					<?php
 						$idt = $_GET['edit'];
-						$tampil=mysql_query("select * from tbth_pelajaran where id_thpelajaran ='$idt'"); 
-						$data=mysql_fetch_array($tampil);
+						$tampil=mysqli_query($connect,"select * from tbth_pelajaran where id_thpelajaran ='$idt'"); 
+						$data=$tampil->fetch_array(MYSQLI_ASSOC);
 					?> 
 					<form method="post" action="proses_edit_tahun_pel.php?idt=<?php echo $data['id_thpelajaran']; ?>">
 					<div class="form-group">

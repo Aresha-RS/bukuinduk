@@ -10,8 +10,8 @@ if (isset($_SESSION['u_abis'])){
 	$level=$_SESSION['l_abis'];
 	
 	if ($level == "Wali Kelas"){
-		$lwakel = mysql_query("select * from tbwali_kelas where username = '$user'");
-		$dwakel = mysql_fetch_array($lwakel);
+		$lwakel = mysqli_query($connect, "select * from tbwali_kelas where username = '$user'");
+		$dwakel = $lwakel->fetch_array(MYSQLI_ASSOC);
 	}
 	
 } else {

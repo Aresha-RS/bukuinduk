@@ -6,8 +6,8 @@
 					
 					<?php
 						$ik = $_GET['edit'];
-						$tampil=mysql_query("select * from tbkelas where id_kelas ='$ik'"); 
-						$data=mysql_fetch_array($tampil);
+						$tampil=mysqli_query($connect,"select * from tbkelas where id_kelas ='$ik'"); 
+						$data=$tampil->fetch_array(MYSQLI_ASSOC);
 					?> 
 					<form method="post" action="proses_edit_kelas.php?ik=<?php echo $data['id_kelas']; ?>">
 					<div class="form-group">

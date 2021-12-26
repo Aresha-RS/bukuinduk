@@ -11,9 +11,9 @@ $user = $_POST['username'];
 $pass = $_POST['password'];
 $level = $_POST['level'];
 
-$simpan = mysql_query("insert into tbadmin values ('','$nip_nuptk','$nama','$jk','$tmp','$tgl','$email','$user','$pass','$level')");
+$simpan = mysqli_query($connect,"insert into tbadmin values ('','$nip_nuptk','$nama','$jk','$tmp','$tgl','$email','$user','$pass','$level')");
 if ($level == "Wali Kelas"){
-	$wali = mysql_query("insert into tbwali_kelas values ('','$user','')");
+	$wali = mysqli_query($connect,"insert into tbwali_kelas values ('','$user','')");
 }
 
 if ($simpan){

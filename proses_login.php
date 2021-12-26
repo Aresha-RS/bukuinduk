@@ -5,9 +5,9 @@ include "koneksi.php";
 $user = $_POST['user'];
 $pass = $_POST['pass'];
 
-$login = mysql_query("select * from tbadmin where username = '$user' and password = '$pass'");
-$data = mysql_fetch_array($login);
-$cek = mysql_num_rows($login);
+$login = mysqli_query($connect,"select * from tbadmin where username = '$user' and password = '$pass'");
+$data = $login->fetch_array(MYSQLI_ASSOC);
+$cek = mysqli_num_rows($login);
 
 if ($cek > 0){
 	$_SESSION['u_abis'] = $user;

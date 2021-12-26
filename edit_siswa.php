@@ -4,8 +4,8 @@
                 </div>
                 <div class="card-body">
 					<?php
-					$lsiswa = mysql_query("select * from tbsiswa,tbkelas where tbsiswa.id_kelas=tbkelas.id_kelas and tbsiswa.id_siswa = '".$_GET['edit']."'");
-					$dsiswa = mysql_fetch_array($lsiswa);
+					$lsiswa = mysqli_query($connect,"select * from tbsiswa,tbkelas where tbsiswa.id_kelas=tbkelas.id_kelas and tbsiswa.id_siswa = '".$_GET['edit']."'");
+					$dsiswa = $lsiswa->fetch_array(MYSQLI_ASSOC);
 					?>
 					<form method="post" action="proses_edit_siswa.php?ids=<?php echo $dsiswa['id_siswa']; ?>">
 					<table class="table table-bordered">

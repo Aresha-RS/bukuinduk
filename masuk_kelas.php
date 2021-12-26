@@ -1,17 +1,17 @@
 			<?php
-			$lk = mysql_query("select * from tbkelas where id_kelas = '".$_GET['idk']."'");
-			$dk = mysql_fetch_array($lk);
+			$lk = mysqli_query($connect,"select * from tbkelas where id_kelas = '".$_GET['idk']."'");
+			$dk = $lk->fetch_array(MYSQLI_ASSOC);
 			
-			$lb = mysql_query("select * from tbsiswa where id_kelas='0'");
-			$jd = mysql_num_rows($lb);
+			$lb = mysqli_query($connect,"select * from tbsiswa where id_kelas='0'");
+			$jd = mysqli_num_rows($lb);
 			
 			$thn_ajar = date("y").date("y")+1;
 					  
-			$lns = mysql_query("select right(NIS,3) as niss from tbsiswa order by NIS Desc");
-			$dns = mysql_fetch_array($lns);
+			$lns = mysqli_query($connect,"select right(NIS,3) as niss from tbsiswa order by NIS Desc");
+			$dns = $lns->fetch_array(MYSQLI_ASSOC);
 					  
-			$lnis = mysql_query("select right(NIS,3) as niss from tbsiswa where id_kelas = '".$_GET['idk']."' order by NIS Desc");
-			$dnis = mysql_fetch_array($lnis);
+			$lnis = mysqli_query($connect,"select right(NIS,3) as niss from tbsiswa where id_kelas = '".$_GET['idk']."' order by NIS Desc");
+			$dnis = $lnis->fetch_array(MYSQLI_ASSOC);
 					  
 			if ($dnis['niss'] == "" and $dns['niss'] != ""){
 				$nis_tmp = $thn_ajar."07".$dns['niss']+1;
@@ -55,8 +55,8 @@
 					  <?php
 					  $no=1;
 					  
-					  $la = mysql_query("select * from tbsiswa where id_kelas = '".$_GET['idk']."' order by nm_lengk_siswa Asc");
-					  while ($da = mysql_fetch_array($la)){
+					  $la = mysqli_query($connect,"select * from tbsiswa where id_kelas = '".$_GET['idk']."' order by nm_lengk_siswa Asc");
+					  while ($da = $la->fetch_array(MYSQLI_ASSOC)){
 					  ?>
                         <tr>
                           <th scope="row"><?=$no;?></th>

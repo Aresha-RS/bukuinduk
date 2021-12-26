@@ -9,8 +9,8 @@
                     <table class="table table-striped table-hover ">
                       
 					  <?php
-					  $la = mysql_query("select * from tbprofil ");
-					  $da = mysql_fetch_array($la)
+					  $la = mysqli_query($connect,"select * from tbprofil ");
+					  $da = $la->fetch_array(MYSQLI_ASSOC);
 					  ?>
                         <tr>
 							<th><td><b>MKKS Wilayah</b></td></th>

@@ -6,8 +6,8 @@
 					
 					<?php
 						$uid = $_GET['edit'];
-						$tampil=mysql_query("select * from tbadmin where id_admin ='$uid'"); 
-						$data=mysql_fetch_array($tampil);
+						$tampil=mysqli_query($connect,"select * from tbadmin where id_admin ='$uid'"); 
+						$data=$tampil->fetch_array(MYSQLI_ASSOC);
 					?> 
 					<form method="post" action="proses_edit_admin.php?udi=<?php echo $data['id_admin']; ?>">
 					<div class="form-group">

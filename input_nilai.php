@@ -19,8 +19,8 @@
 				
 					<?php
 					if (isset($_GET['nm'])){
-					$lsiswa = mysql_query("select * from tbsiswa,tbkelas where tbsiswa.id_kelas=tbkelas.id_kelas and tbsiswa.nm_lengk_siswa = '".$_GET['nm']."'");
-					$dsiswa = mysql_fetch_array($lsiswa);
+					$lsiswa = mysqli_query($connect,"select * from tbsiswa,tbkelas where tbsiswa.id_kelas=tbkelas.id_kelas and tbsiswa.nm_lengk_siswa = '".$_GET['nm']."'");
+					$dsiswa = $lsiswa->fetch_array(MYSQLI_ASSOC);
 					?>
 					
 					<form method="post" action="proses_input_nilai.php">
@@ -51,8 +51,8 @@
 						<select name="semester" class="form-control" style="width:70px">
 						<?php
 						for ($i=1;$i<=6;$i++){
-						$ls = mysql_query("select * from tbnilai,tbsiswa where tbnilai.id_siswa=tbsiswa.id_siswa and tbnilai.semester='$i' and tbsiswa.nm_lengk_siswa = '".$_GET['nm']."'");
-						$js = mysql_num_rows($ls);
+						$ls = mysqli_query($connect,"select * from tbnilai,tbsiswa where tbnilai.id_siswa=tbsiswa.id_siswa and tbnilai.semester='$i' and tbsiswa.nm_lengk_siswa = '".$_GET['nm']."'");
+						$js = mysqli_num_rows($ls);
 						
 						if ($js == 0){
 						?>
@@ -83,8 +83,8 @@
 					</tr>
 					<?php
 					$no_a=1;
-					$lpel_a = mysql_query("select * from tbpelajaran where kelompok = 'A'");
-					while ($dpel_a = mysql_fetch_array($lpel_a)){
+					$lpel_a = mysqli_query($connect,"select * from tbpelajaran where kelompok = 'A'");
+					while ($dpel_a = $lpel_a->fetch_array(MYSQLI_ASSOC)){
 					?>
 					<tr>
 						<td><?=$no_a++;?></td>
@@ -108,8 +108,8 @@
 					</tr>
 					<?php
 					$no_b=1;
-					$lpel_b = mysql_query("select * from tbpelajaran where kelompok = 'B'");
-					while ($dpel_b = mysql_fetch_array($lpel_b)){
+					$lpel_b = mysqli_query($connect,"select * from tbpelajaran where kelompok = 'B'");
+					while ($dpel_b = $lpel_b->fetch_array(MYSQLI_ASSOC)){
 					?>
 					<tr>
 						<td><?=$no_b++;?></td>

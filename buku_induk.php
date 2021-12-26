@@ -28,11 +28,11 @@
 					  $no = $start+1;
 					  
 					  if ($level == "Wali Kelas"){
-					  $la = mysql_query("select * from tbsiswa where id_kelas='".$dwakel['id_kelas']."'");
+					  $la = mysqli_query($connect,"select * from tbsiswa where id_kelas='".$dwakel['id_kelas']."'");
 					  } else {
-					  $la = mysql_query("select * from tbsiswa limit $start,$ph");
+					  $la = mysqli_query($connect,"select * from tbsiswa limit $start,$ph");
 					  }
-					  while ($da = mysql_fetch_array($la)){
+					  while ($da = $la->fetch_array(MYSQLI_ASSOC)){
 					  ?>
                         <tr>
                           <th scope="row"><?=$no;?></th>
@@ -49,12 +49,12 @@
 					  }
 					  
 					  if ($level == "Wali Kelas"){
-					  $lb = mysql_query("select * from tbsiswa where id_kelas='".$dwakel['id_kelas']."'");
+					  $lb = mysqli_query($connect,"select * from tbsiswa where id_kelas='".$dwakel['id_kelas']."'");
 					  } else {
-					  $lb = mysql_query("select * from tbsiswa");
+					  $lb = mysqli_query($connect,"select * from tbsiswa");
 					  }
 					  
-					  $jd = mysql_num_rows($lb);
+					  $jd = mysqli_num_rows($lb);
 					  $jumhal = ceil($jd/$ph);
 					  ?>
                       </tbody>

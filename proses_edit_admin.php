@@ -9,7 +9,7 @@ $username=$_POST['username'];
 $pass =$_POST['password'];
 $akses=$_POST['akses'];
 
-$ubah=mysql_query("UPDATE tbadmin set nama_lengkap='$nama',nip_nuptk='$nip_nuptk', jenis_kelamin='$jenkel', email='$email', username='$username', password='$pass', akses_level='$akses' where id_admin='$udi'") or die (mysql_error());
+$ubah=mysqli_query($connect, "UPDATE tbadmin set nama_lengkap='$nama',nip_nuptk='$nip_nuptk', jenis_kelamin='$jenkel', email='$email', username='$username', password='$pass', akses_level='$akses' where id_admin='$udi'") or die (mysql_error());
 if ($ubah)
 {
 	header("location:index.php?hal=data_admin&berhasil=ok");

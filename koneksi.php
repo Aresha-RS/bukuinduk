@@ -1,5 +1,5 @@
 <?php
-mysqli_connect("localhost","root","","buku_induk");
+$connect = mysqli_connect("localhost","root","","buku_induk",3306,true);
 //mysqli_select_db("buku_induk");
 
 function getAktif($url){

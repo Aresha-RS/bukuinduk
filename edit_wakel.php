@@ -6,8 +6,8 @@
 					
 					<?php
 						$id = $_GET['edit'];
-						$tampil=mysql_query("select * from tbwali_kelas where id_wk ='$id'"); 
-						$data=mysql_fetch_array($tampil);
+						$tampil=mysqli_query($connect,"select * from tbwali_kelas where id_wk ='$id'"); 
+						$data=$tampil->fetch_array(MYSQLI_ASSOC);
 					?> 
 					<form method="post" action="proses_edit_wk.php?id=<?php echo $data['id_wk']; ?>">
 					<div class="form-group">
@@ -30,8 +30,8 @@
 						<label>Wali Kelas</label>
 								<select name="id_kelas" class="form-control col-md-1">
 								<?php
-								$tampil=mysql_query("select * from tbkelas");
-								while($w=mysql_fetch_array($tampil)){
+								$tampil=mysqli_query($connect,"select * from tbkelas");
+								while($w=$tampil->fetch_array(MYSQLI_ASSOC)){
 								echo "<option value=$w[id_kelas] selected>$w[kelas]</option>";
 								}
 								echo"</select>";
@@ -41,8 +41,8 @@
 						<label>Tahun Pelajaran</label>
 						<select name="id_thpelajaran" class="form-control col-md-2">
 								<?php
-								$tampil=mysql_query("select * from tbth_pelajaran");
-								while($w=mysql_fetch_array($tampil)){
+								$tampil=mysqli_query($connect,"select * from tbth_pelajaran");
+								while($w=$tampil->fetch_array(MYSQLI_ASSOC)){
 								echo "<option value=$w[id_thpelajaran] selected>$w[th_pelajaran]</option>";
 								}
 								echo"</select>";

@@ -38,13 +38,13 @@
 					  
 					  if (isset($_GET['cari'])){
 					  $cari = $_GET['cari'];
-						$la = mysql_query("select * from tbadmin where nama_lengkap like '%$cari%' limit $start,$ph");
+						$la = mysqli_query($connect,"select * from tbadmin where nama_lengkap like '%$cari%' limit $start,$ph");
 					  } else {
-						$la = mysql_query("select * from tbadmin limit $start,$ph");
+						$la = mysqli_query($connect,"select * from tbadmin limit $start,$ph");
 					  }
-					  $jml = mysql_num_rows($la);
+					  $jml = mysqli_num_rows($la);
 					  if ($jml > 0){
-					  while ($da = mysql_fetch_array($la)){
+					  while ($da = $la->fetch_array(MYSQLI_ASSOC)){
 					  ?>
                         <tr>
                           <th scope="row"><?=$no;?></th>
@@ -62,8 +62,8 @@
 					  <?php
 					  $no++;
 					  }
-					  $lb = mysql_query("select * from tbadmin");
-					  $jd = mysql_num_rows($lb);
+					  $lb = mysqli_query($connect,"select * from tbadmin");
+					  $jd = mysqli_num_rows($lb);
 					  $jumhal = ceil($jd/$ph);
 					  } else {
 					  ?>
