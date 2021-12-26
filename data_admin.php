@@ -37,7 +37,7 @@
 					  $no = $start+1;
 					  
 					  if (isset($_GET['cari'])){
-					  $cari = $_GET['cari'];
+					  	$cari = $_GET['cari'];
 						$la = mysqli_query($connect,"select * from tbadmin where nama_lengkap like '%$cari%' limit $start,$ph");
 					  } else {
 						$la = mysqli_query($connect,"select * from tbadmin limit $start,$ph");

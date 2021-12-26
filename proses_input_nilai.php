@@ -17,8 +17,8 @@ $thpel = $_POST['th_pel'];
 $user = $_SESSION['u_abis'];
 $nm = $_POST['nm'];
 
-$cek = mysql_query("select * from tbnilai where semester='$semester' and id_siswa='$ids' and username='$user'");
-$jml = mysql_num_rows($cek);
+$cek = mysqli_query($connect,"select * from tbnilai where semester='$semester' and id_siswa='$ids' and username='$user'");
+$jml = mysqli_num_rows($cek);
 
 if ($jml > 0){
 	
@@ -29,14 +29,14 @@ if ($jml > 0){
 $i=0;
 foreach ($an_peng as $nilai1){
 	$query1 = "insert into tbnilai values ('','$apel[$i]','$thpel','$semester','$nilai1','$an_ket[$i]','$an_sikap[$i]','$ids','$user','$tgl')";
-	$simpan1 = mysql_query($query1);
+	$simpan1 = mysqli_query($connect, $query1);
 	$i++;
 }
 
 $j=0;
 foreach ($bn_peng as $nilai2){
 	$query2 = "insert into tbnilai values ('','$bpel[$j]','$thpel','$semester','$nilai2','$bn_ket[$j]','$bn_sikap[$j]','$ids','$user','$tgl')";
-	$simpan2 = mysql_query($query2);
+	$simpan2 = mysqli_query($connect, $query2);
 	$j++;
 }
 

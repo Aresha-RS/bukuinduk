@@ -3,8 +3,8 @@ include"koneksi.php";
 $ik=$_GET['ik'];
 $kelas=$_POST['kelas'];
 $ruang=$_POST['ruang'];
-
-$ubah=mysql_query("UPDATE tbkelas set kelas='$kelas', ruang='$ruang' where id_kelas='$ik'") or die (mysql_error());
+$ruang_kelas = $kelas." ".$ruang;
+$ubah=mysqli_query($connect,"UPDATE tbkelas set kelas='$kelas', ruang='$ruang', ruang_kelas='$ruang_kelas' where id_kelas='$ik'") or die (mysqli_error());
 if ($ubah)
 {
 	header("location:index.php?hal=data_kelas&berhasil=ok");

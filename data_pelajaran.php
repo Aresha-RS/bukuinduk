@@ -5,7 +5,7 @@
                 <div class="card-body">
 				<form method="get" action="">
 				<div class="form-group">
-					<input type="hidden" name="hal" value="data_admin">
+					<input type="hidden" name="hal" value="data_pelajaran">
 					<input type="text" name="cari" placeholder="Masukan kata kunci..." class="form-control">
 				</div>
 				</form>
@@ -32,7 +32,13 @@
 					  $ph = 5;
 					  $start = ($nohal - 1) * $ph;
 					  $no = $start+1;
-					  $la = mysqli_query($connect,"select * from tbpelajaran limit $start,$ph");
+					  if(isset($_GET["cari"])){
+						$cari = $_GET["cari"];
+						$st = "select * from tbpelajaran WHERE nama_pelajaran like '%$cari%' limit $start,$ph";
+					  }else{
+						$st = "select * from tbpelajaran limit $start,$ph";
+					  }
+					  $la = mysqli_query($connect,$st);
 					  while ($da = $la->fetch_array(MYSQLI_ASSOC)){
 					  ?>
                         <tr>

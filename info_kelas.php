@@ -1,9 +1,10 @@
 			<?php
+			error_reporting(0);
 			$lk = mysqli_query($connect,"select * from tbkelas where id_kelas = '".$_GET['idk']."'");
 			$dk = $lk->fetch_array(MYSQLI_ASSOC);
 			
 			$lb = mysqli_query($connect,"select * from tbsiswa where id_kelas='0'");
-			$jd = mysql_num_rows($lb);
+			$jd = mysqli_num_rows($lb);
 			
 			$thn_ajar = date("y").date("y")+1;
 					  

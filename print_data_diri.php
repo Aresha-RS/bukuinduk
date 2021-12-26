@@ -1,7 +1,7 @@
 					<?php
 					include "koneksi.php";
-					$lsiswa = mysql_query("select * from tbsiswa,tbkelas where tbsiswa.id_kelas=tbkelas.id_kelas and tbsiswa.id_siswa = '".$_GET['ids']."'");
-					$dsiswa = mysql_fetch_array($lsiswa);
+					$lsiswa = mysqli_query($connect, "select * from tbsiswa,tbkelas where tbsiswa.id_kelas=tbkelas.id_kelas and tbsiswa.id_siswa = '".$_GET['ids']."'");
+					$dsiswa = $lsiswa->fetch_array(MYSQLI_ASSOC);
 					
 					if (isset($_GET['print'])){
 					$ns = str_replace(" ","_",$dsiswa['nm_lengk_siswa']);

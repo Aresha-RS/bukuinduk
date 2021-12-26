@@ -4,7 +4,7 @@ include "koneksi.php";
 $user = $_GET['username'];
 $idk = $_GET['idk'];
 
-$edit = mysql_query("update tbwali_kelas set id_kelas = '$idk' where username='$user'");
+$edit = mysqli_query($connect,"update tbwali_kelas set id_kelas = '$idk' where username='$user'");
 
 if ($edit){
 	echo "<script>alert('Pemilihan Kelas Berhasil!');

@@ -47,7 +47,7 @@ $pekerjaan_ibu = $_POST['pekerjaan_ibu'];
 $penghasilan_ibu = $_POST['penghasilan_ibu'];
 $alamat_ibu = $_POST['alamat_ibu'];
 
-$ubah=mysql_query("UPDATE tbsiswa set 
+$ubah=mysqli_query($connect,"UPDATE tbsiswa set 
 nisn='$nisn',
 nm_lengk_siswa='$nm_lengk_siswa',
 nm_pang_siswa='$nm_pang_siswa',
@@ -92,7 +92,7 @@ tgl_lhr_ibu='$tgl_lhr_ibu',
 pend_ibu='$pnd_ibu',
 pekerjaan_ibu='$pekerjaan_ibu',
 penghasilan_ibu='$penghasilan_ibu',
-alamat_ibu='$alamat_ibu' where id_siswa='$ids'") or die (mysql_error());
+alamat_ibu='$alamat_ibu' where id_siswa='$ids'") or die (mysqli_error());
 if ($ubah)
 {
 	header("location:index.php?hal=data_siswa&berhasil=ok");

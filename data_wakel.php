@@ -32,18 +32,30 @@
 					  $ph = 5;
 					  $start = ($nohal - 1) * $ph;
 					  $no = $start+1;
-					  $la = mysqli_query($connect,"select * from tbwali_kelas, tbadmin where tbwali_kelas.username=tbadmin.username limit $start,$ph");
-					  while ($da = $la->fetch_array(MYSQLI_ASSOC)){
 					  
-					  $la2 = mysqli_query($connect,"select * from tbkelas where id_kelas = '".$da['id_kelas']."'");
-					  $da2 = $la2->fetch_array(MYSQLI_ASSOC)
+					if(isset($_GET["cari"])){
+						$cari = $_GET["cari"];
+						$st="SELECT twk.*, tba.*, tbk.ruang_kelas from tbwali_kelas As twk
+							 INNER JOIN tbadmin AS tba ON tba.username=twk.username
+							 INNER JOIN tbkelas AS tbk ON tbk.id_kelas=twk.id_kelas
+							 WHERE twk.username LIKE '%$cari%' OR tbk.ruang_kelas like '%$cari%' limit $start,$ph
+							";
+						$la = mysqli_query($connect, $st);
+					}else{
+						$st="SELECT twk.*, tba.*, tbk.ruang_kelas, tbk.ruang from tbwali_kelas As twk
+							 INNER JOIN tbadmin AS tba ON tba.username=twk.username
+							 INNER JOIN tbkelas AS tbk ON tbk.id_kelas=twk.id_kelas limit $start,$ph
+							";
+						$la = mysqli_query($connect, $st);
+					}
+					  	while ($da = $la->fetch_array(MYSQLI_ASSOC)){
 					  ?>
                         <tr>
                           <th scope="row"><?=$no;?></th>
                           <td><?=$da['nip_nuptk'];?></td>
                           <td><?=$da['nama_lengkap'];?></td>
                           <td><?=$da['tempat_lahir'];?>, <?=$da['tgl_lahir'];?></td>
-                          <td><?=$da2['kelas'];?> <?=$da2['ruang'];?></td>
+                          <td><?=$da['ruang_kelas'];?></td>
                           <td>
 						  <a href="index.php?hal=pilih_kelas&username=<?php echo $da['username'];?>" class="label label-primary">Pilih Kelas</a> 
 						  <a href="hapus.php?data=wakel&id=<?=$da['username'];?>" class="label label-warning" onclick="return confirm('Yakin Hapus ini?')">Hapus</a>

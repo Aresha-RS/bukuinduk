@@ -40,12 +40,22 @@
 					  $ph = 10;
 					  $start = ($nohal - 1) * $ph;
 					  $no = $start+1;
-					  
-					  if ($level == "Wali Kelas"){
-						$la = mysqli_query($connect,"select * from tbsiswa where id_kelas='".$dwakel['id_kelas']."' limit $start,$ph");
-					  } else {
-						$la = mysqli_query($connect,"select * from tbsiswa limit $start,$ph");
-					  }
+		
+					if ($level == "Wali Kelas"){
+						if(isset($_GET['cari'])){
+							$cari = $_GET['cari'];
+							$la = mysqli_query($connect,"select * from tbsiswa where id_kelas='".$dwakel['id_kelas']."' AND nm_lengk_siswa like '%$cari%' limit $start,$ph");
+						}else{
+							$la = mysqli_query($connect,"select * from tbsiswa where id_kelas='".$dwakel['id_kelas']."' limit $start,$ph");
+						}
+					} else {
+						if(isset($_GET['cari'])){
+							$cari = $_GET['cari'];
+							$la = mysqli_query($connect,"select * from tbsiswa WHERE nm_lengk_siswa like '%$cari%' limit $start,$ph");
+						}else{
+							$la = mysqli_query($connect,"select * from tbsiswa limit $start,$ph");
+						}
+					}
 					  while ($da = $la->fetch_array(MYSQLI_ASSOC)){
 					  ?>
                         <tr>
@@ -66,13 +76,13 @@
 					  $no++;
 					  }
 					  
-					  if ($level == "Wali Kelas"){
-					  $lb = mysqli_query($connect,"select * from tbsiswa where id_kelas='".$dwakel['id_kelas']."'");
-					  } else {
-					  $lb = mysqli_query($connect,"select * from tbsiswa");
-					  }
+					//   if ($level == "Wali Kelas"){
+					//   $lb = mysqli_query($connect,"select * from tbsiswa where id_kelas='".$dwakel['id_kelas']."'");
+					//   } else {
+					//   $lb = mysqli_query($connect,"select * from tbsiswa");
+					//   }
 					  
-					  $jd = mysqli_num_rows($lb);
+					  $jd = mysqli_num_rows($la);
 					  $jumhal = ceil($jd/$ph);
 					  ?>
                       </tbody>

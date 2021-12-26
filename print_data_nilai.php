@@ -1,8 +1,8 @@
 
 					<?php
 					include "koneksi.php";
-					$lsiswa = mysql_query("select * from tbsiswa,tbkelas where tbsiswa.id_kelas=tbkelas.id_kelas and tbsiswa.id_siswa = '".$_GET['ids']."'");
-					$dsiswa = mysql_fetch_array($lsiswa);
+					$lsiswa = mysqli_query($connect, "select * from tbsiswa,tbkelas where tbsiswa.id_kelas=tbkelas.id_kelas and tbsiswa.id_siswa = '".$_GET['ids']."'");
+					$dsiswa = $lsiswa->fetch_array(MYSQLI_ASSOC);
 					
 					if (isset($_GET['print'])){
 					$ns = str_replace(" ","_",$dsiswa['nm_lengk_siswa']);
@@ -39,8 +39,8 @@
 					$jna_p=0;
 					$jna_k=0;
 					$no_a=1;
-					$lpel_a = mysql_query("select * from tbpelajaran,tbnilai where tbpelajaran.id_pelajaran=tbnilai.id_pelajaran and tbnilai.id_siswa='".$_GET['ids']."' and tbnilai.semester='$sm' and tbpelajaran.kelompok = 'A'");
-					while ($dpel_a = mysql_fetch_array($lpel_a)){
+					$lpel_a = mysqli_query($connect, "select * from tbpelajaran,tbnilai where tbpelajaran.id_pelajaran=tbnilai.id_pelajaran and tbnilai.id_siswa='".$_GET['ids']."' and tbnilai.semester='$sm' and tbpelajaran.kelompok = 'A'");
+					while ($dpel_a = $lpel_a->fetch_array(MYSQLI_ASSOC)){
 						$ap = $dpel_a['angka_pengetahuan'];
 						$ak = $dpel_a['angka_keterampilan'];
 						
@@ -101,8 +101,8 @@
 					$jnb_p=0;
 					$jnb_k=0;
 					$no_b=1;
-					$lpel_b = mysql_query("select * from tbpelajaran,tbnilai where tbpelajaran.id_pelajaran=tbnilai.id_pelajaran and tbnilai.id_siswa='".$_GET['ids']."' and tbnilai.semester='$sm' and tbpelajaran.kelompok = 'B'");
-					while ($dpel_b = mysql_fetch_array($lpel_b)){
+					$lpel_b = mysqli_query($connect, "select * from tbpelajaran,tbnilai where tbpelajaran.id_pelajaran=tbnilai.id_pelajaran and tbnilai.id_siswa='".$_GET['ids']."' and tbnilai.semester='$sm' and tbpelajaran.kelompok = 'B'");
+					while ($dpel_b = $lpel_b->fetch_array(MYSQLI_ASSOC)){
 						$apb = $dpel_b['angka_pengetahuan'];
 						$akb = $dpel_b['angka_keterampilan'];
 						
@@ -156,15 +156,15 @@
 					</tr>
 					<?php
 					}
-					$lpel = mysql_query("select * from tbpelajaran");
-					$jpel = mysql_num_rows($lpel);
+					$lpel = mysqli_query($connect,"select * from tbpelajaran");
+					$jpel = mysqli_num_rows($lpel);
 					
 					$jns = ($jna_p+$jnb_p) + ($jna_k+$jnb_k);
 					
 					$n=1;
 					$rank=0;
-					$lnil = mysql_query("SELECT sum(tbnilai.angka_pengetahuan)+sum(tbnilai.angka_keterampilan) as jumlah,tbsiswa.id_siswa FROM tbnilai,tbkelas,tbsiswa where tbnilai.id_siswa=tbsiswa.id_siswa and tbsiswa.id_kelas=tbkelas.id_kelas and tbsiswa.id_kelas='5' GROUP BY tbsiswa.id_siswa order by sum(tbnilai.angka_pengetahuan)+sum(tbnilai.angka_keterampilan) desc");
-					while ($dnil = mysql_fetch_array($lnil)){						
+					$lnil = mysqli_query($connect, "SELECT sum(tbnilai.angka_pengetahuan)+sum(tbnilai.angka_keterampilan) as jumlah,tbsiswa.id_siswa FROM tbnilai,tbkelas,tbsiswa where tbnilai.id_siswa=tbsiswa.id_siswa and tbsiswa.id_kelas=tbkelas.id_kelas and tbsiswa.id_kelas='5' GROUP BY tbsiswa.id_siswa order by sum(tbnilai.angka_pengetahuan)+sum(tbnilai.angka_keterampilan) desc");
+					while ($dnil = $lnil->fetch_array(MYSQLI_ASSOC)){						
 						if ($dsiswa['id_siswa'] == $dnil['id_siswa']){
 							$rank = $n;
 						}

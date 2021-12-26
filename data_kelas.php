@@ -6,7 +6,7 @@
                   <div class="table-responsive">
 				  <form method="get" action="">
 				<div class="form-group">
-					<input type="hidden" name="hal" value="data_admin">
+					<input type="hidden" name="hal" value="data_kelas">
 					<input type="text" name="cari" placeholder="Masukan kata kunci..." class="form-control">
 				</div>
 				</form>
@@ -30,7 +30,13 @@
 					  $ph = 5;
 					  $start = ($nohal - 1) * $ph;
 					  $no = $start+1;
-					  $la = mysqli_query($connect,"select * from tbkelas order by ruang Asc limit $start,$ph");
+					  if(isset($_GET["cari"])){
+						$cari = $_GET["cari"];
+						$st = "select * from tbkelas WHERE kelas LIKE '%$cari%' order by ruang Asc limit $start,$ph";
+					  }else{
+						$st = "select * from tbkelas order by ruang Asc limit $start,$ph";
+					  }
+					  $la = mysqli_query($connect,$st);
 					  while ($da = $la->fetch_array(MYSQLI_ASSOC)){
 					  ?>
                         <tr>

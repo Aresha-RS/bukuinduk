@@ -26,8 +26,8 @@
 					  $ph = 10;
 					  $start = ($nohal - 1) * $ph;
 					  $no = $start+1;
-					  $la = mysql_query("select * from tbsiswa where id_kelas='".$dwakel['id_kelas']."' limit $start,$ph");
-					  while ($da = mysql_fetch_array($la)){
+					  $la = mysqli_query($connect, "select * from tbsiswa where id_kelas='".$dwakel['id_kelas']."' limit $start,$ph");
+					  while ($da = $la->fetch_array(MYSQLI_ASSOC)){
 					  ?>
                         <tr>
                           <th scope="row"><?=$no;?></th>

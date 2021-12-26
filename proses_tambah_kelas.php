@@ -3,15 +3,16 @@ include "koneksi.php";
 
 $kls = $_POST['kelas'];
 $ruang = strtoupper($_POST['ruang']);
+$ruang_kelas = $kls." ".$ruang;
 
-$lkelas = mysql_query("select * from tbkelas where kelas='$kls' and ruang='$ruang'");
-$jkelas = mysql_num_rows($lkelas);
+$lkelas = mysqli_query($connect,"select * from tbkelas where kelas='$kls' and ruang='$ruang'");
+$jkelas = mysqli_num_rows($lkelas);
 
 if ($jkelas > 0){
 	echo "<script>alert('Kelas Suda Ada!');
 	document.location='index.php?hal=tambah_data_kelas'</script>";
 } else {
-	$simpan = mysql_query("insert into tbkelas values ('','$kls','$ruang')");
+	$simpan = mysqli_query($connect,"insert into tbkelas values ('','$kls','$ruang','$ruang_kelas')");
 }
 
 if ($simpan){
