@@ -1,6 +1,6 @@
 <?php
-mysqli_connect("localhost","root","","buku_induk");
-//mysqli_select_db("buku_induk");
+mysqli_connect("localhost","root","");
+mysqli_select_db("buku_induk");
 
 function getAktif($url){
 	if (isset($_GET['hal'])){
