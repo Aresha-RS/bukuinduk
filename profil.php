@@ -1,17 +1,17 @@
 			  <div class="card">
+			  	<?php
+					$la = mysqli_query($connect,"select * from tbprofil ");
+					$da = $la->fetch_array(MYSQLI_ASSOC);
+				?>
                 <div class="card-header align-text-center">
 				<marquee behavior="alternate">
-				<h4>  Selamat Datang Di Aplikasi Buku Induk Siswa SMPN SATAP 1 CIGALONTANG</h4>
+				<h4>  Selamat Datang Di Aplikasi Buku Induk Siswa <?=$da['nama_Sekolah']?></h4>
                 </marquee>
 				</div>
                 <div class="card-body">
                   <div class="table-responsive">
                     <table class="table table-striped table-hover ">
                       
-					  <?php
-					  $la = mysqli_query($connect,"select * from tbprofil ");
-					  $da = $la->fetch_array(MYSQLI_ASSOC);
-					  ?>
                         <tr>
 							<th><td><b>MKKS Wilayah</b></td></th>
 							<td><?=$da['mkks'];?></td>
@@ -19,11 +19,11 @@
 						<tr>
 							<th><td><b>NPSN Sekolah</b></td></th>
 							<td><?=$da['npsn'];?></td>
-							<td rowspan="9">
+							<!-- <td rowspan="9">
 								<div class="pull-right image">
 									<img src="img/images.jpg" class="img-rounded" height="200" width="150" alt="User Image" />
 								</div>
-							</td>
+							</td> -->
 						</tr>
 						<tr>
 							<th><td><b>Nama Sekolah</b></td></th>

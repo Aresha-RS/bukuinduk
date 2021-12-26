@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "koneksi.php";
+error_reporting(0);
 
 if (isset($_SESSION['u_abis'])){
 	$user =$_SESSION['u_abis'];

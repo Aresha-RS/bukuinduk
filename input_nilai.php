@@ -19,8 +19,12 @@
 				
 					<?php
 					if (isset($_GET['nm'])){
-					$lsiswa = mysqli_query($connect,"select * from tbsiswa,tbkelas where tbsiswa.id_kelas=tbkelas.id_kelas and tbsiswa.nm_lengk_siswa = '".$_GET['nm']."'");
-					$dsiswa = $lsiswa->fetch_array(MYSQLI_ASSOC);
+						$nama = $_GET["nm"];
+						$query = "SELECT tbs.*, tbk.* FROM tbsiswa AS tbs
+									LEFT JOIN  tbkelas AS tbk ON tbk.id_kelas=tbs.id_kelas
+								  WHERE tbs.nm_lengk_siswa='$nama'";
+						$lsiswa = mysqli_query($connect,$query);
+						$dsiswa = $lsiswa->fetch_array(MYSQLI_ASSOC);
 					?>
 					
 					<form method="post" action="proses_input_nilai.php">
@@ -31,7 +35,13 @@
 					</tr>
 					<tr>
 						<td>Kelas</td>
-						<td><?=$dsiswa['kelas'];?> <?=$dsiswa['ruang'];?></td>
+						<?php $kls = is_null($dsiswa['id_kelas']) ? "text-danger" : ""; ?>
+						<td class="<?=$kls?>">
+							<?php 
+								$kelas = is_null($dsiswa['id_kelas']) ? "Belum memiliki kelas" : $dsiswa['kelas']." ".$dsiswa['ruang'];
+								echo $kelas;
+							?>
+						</td>
 					</tr>
 					<tr>
 						<td>No. Induk</td>
@@ -69,6 +79,7 @@
 					<input type="hidden" value="<?=$dsiswa['id_siswa'];?>" name="ids">
 					<input type="hidden" value="<?=$_GET['nm'];?>" name="nm">
 					<input type="hidden" value="<?=$th_pelajaran;?>" name="th_pel">
+					<?php if(!is_null($dsiswa['id_kelas'])){ ?>
 					<table class="table table-bordered">
 					<tr>
 						<th width="5%">No</th>
@@ -134,6 +145,6 @@
 					</table>
 					</form>
 					
-					<?php } ?>
+					<?php }} ?>
 				</div>
               </div>
